@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Katalog Produk</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Katalog Produk</h1>
+    <div class="cart-info">🛒 <span id="cartCount">0</span></div>
+  </header>
+
+  <main>
+    <div id="productContainer" class="products"></div>
+    <aside id="cartList" class="cart">
+      <h2>Keranjang</h2>
+      <ul id="cartItems"></ul>
+      <p id="totalPrice">Total Harga: Rp 0</p>
+      <button onclick="checkout()">Bayar</button>
+    </aside>
+  </main>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
