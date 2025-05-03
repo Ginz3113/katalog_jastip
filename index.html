@@ -1,28 +1,34 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Katalog Produk</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Katalog Produk</h1>
-    <div class="cart-info">🛒 <span id="cartCount">0</span></div>
-  </header>
+  <header>Katalog Produk</header>
 
-  <main>
-    <div id="productContainer" class="products"></div>
-    <aside id="cartList" class="cart">
-      <h2>Keranjang</h2>
-      <ul id="cartItems"></ul>
-      <p id="totalPrice">Total Harga: Rp 0</p>
-      <button onclick="checkout()">Bayar</button>
-    </aside>
-  </main>
+  <div class="cart" id="cart">
+    <i class="fas fa-shopping-cart"></i> Keranjang: <span id="cartCount">0</span> produk
+  </div>
 
-  <script src="products.js"></script>
-  <script src="script.js"></script>
+  <div class="cart-list" id="cartList">
+    <h4>Isi Keranjang:</h4>
+    <ul id="cartItems"></ul>
+    <div class="total-price" id="totalPrice">Total Harga: Rp 0</div>
+    <div class="checkout">
+      <button id="checkoutBtn">Bayar Sekarang</button>
+      <button id="saveCartBtn">Simpan Keranjang</button>
+    </div>
+  </div>
+
+  <div class="container" id="productContainer"></div>
+  <div id="popupContainer"></div>
+
+  <script src="products.js" defer></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

@@ -1,27 +1,37 @@
-
 const productContainer = document.getElementById("productContainer");
 const cartCount = document.getElementById("cartCount");
 const cartItems = document.getElementById("cartItems");
 const totalPriceEl = document.getElementById("totalPrice");
 const cartList = document.getElementById("cartList");
+const checkoutBtn = document.getElementById("checkoutBtn");
+const saveCartBtn = document.getElementById("saveCartBtn");
+
+if (!productContainer || !cartCount || !cartItems || !totalPriceEl || !cartList) {
+  console.error("Satu atau lebih elemen HTML tidak ditemukan.");
+}
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function updateCart() {
   cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
   cartItems.innerHTML = "";
-
   let total = 0;
+
   cart.forEach(item => {
-    total += item.price * item.quantity;
+    const itemTotal = item.price * item.quantity;
+    total += itemTotal;
+
     const li = document.createElement("li");
     li.innerHTML = `
-      ${item.name} (x${item.quantity}) - Rp ${item.price * item.quantity}
-      <button onclick="removeFromCart(${item.id})">Hapus</button>
+      <strong>${item.name}</strong> (x${item.quantity}) - Rp ${itemTotal.toLocaleString("id-ID")}
+      <button onclick="changeQty(${item.id}, 1)">+</button>
+      <button onclick="changeQty(${item.id}, -1)">-</button>
+      <button onclick="removeFromCart(${item.id})">🗑</button>
     `;
     cartItems.appendChild(li);
   });
-  totalPriceEl.textContent = `Total Harga: Rp ${total}`;
+
+  totalPriceEl.textContent = `Total Harga: Rp ${total.toLocaleString("id-ID")}`;
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
@@ -40,36 +50,53 @@ function removeFromCart(id) {
   updateCart();
 }
 
-function checkout() {
-  alert("Pembayaran berhasil! Terima kasih telah berbelanja.");
-  cart = [];
-  updateCart();
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (item) {
+    item.quantity += delta;
+    if (item.quantity <= 0) {
+      removeFromCart(id);
+    } else {
+      updateCart();
+    }
+  }
 }
 
 function saveCartToTxt() {
-  if (cart.length === 0) {
-    alert("Keranjang kosong!");
-    return;
-  }
-  let text = "Isi Keranjang:\n";
+  if (cart.length === 0) return alert("Keranjang kosong.");
+
+  let txt = "Isi Keranjang:\n";
   let total = 0;
   cart.forEach(item => {
     const subtotal = item.price * item.quantity;
     total += subtotal;
-    text += `${item.name} (x${item.quantity}) - Rp ${subtotal}\n`;
+    txt += `${item.name} x${item.quantity} - Rp ${subtotal.toLocaleString("id-ID")}\n`;
   });
-  text += `\nTotal Harga: Rp ${total}`;
+  txt += `\nTotal Harga: Rp ${total.toLocaleString("id-ID")}`;
 
-  const blob = new Blob([text], { type: "text/plain" });
+  const blob = new Blob([txt], { type: "text/plain" });
   const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
-  link.href = url;
-  link.download = "keranjang.txt";
-  link.click();
-  URL.revokeObjectURL(url);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "keranjang.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function checkout() {
+  if (cart.length === 0) return alert("Keranjang kosong.");
+  alert("Pembayaran berhasil. Terima kasih!");
+  cart = [];
+  updateCart();
 }
 
 function renderProducts() {
+  if (!Array.isArray(products)) {
+    console.error("products belum didefinisikan.");
+    return;
+  }
+
   productContainer.innerHTML = "";
   products.forEach(product => {
     const card = document.createElement("div");
@@ -78,20 +105,17 @@ function renderProducts() {
       <img src="${product.image}" alt="${product.name}" />
       <h3>${product.name}</h3>
       <p>${product.description}</p>
-      <p class="price">Rp ${product.price}</p>
-      <button onclick='addToCart(${JSON.stringify(product)})'>+ Keranjang</button>
+      <p class="price">Rp ${product.price.toLocaleString("id-ID")}</p>
+      <button class="add-to-cart-btn">+ Keranjang</button>
     `;
+    const btn = card.querySelector(".add-to-cart-btn");
+    btn.addEventListener("click", () => addToCart(product));
     productContainer.appendChild(card);
   });
-
-  if (!document.getElementById("saveCartBtn")) {
-    const saveBtn = document.createElement("button");
-    saveBtn.id = "saveCartBtn";
-    saveBtn.textContent = "Simpan Keranjang";
-    saveBtn.onclick = saveCartToTxt;
-    cartList.appendChild(saveBtn);
-  }
 }
+
+if (checkoutBtn) checkoutBtn.addEventListener("click", checkout);
+if (saveCartBtn) saveCartBtn.addEventListener("click", saveCartToTxt);
 
 renderProducts();
 updateCart();
