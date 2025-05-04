@@ -23,7 +23,7 @@ function updateCart() {
 
     const li = document.createElement("li");
     li.innerHTML = `
-      <strong>${item.name}</strong> (x${item.quantity}) - Rp ${itemTotal.toLocaleString("id-ID")}
+      <strong>${item.name}</strong> (x${item.quantity}) - Jpy ${itemTotal.toLocaleString("id-ID")}
       <button onclick="changeQty(${item.id}, 1)">+</button>
       <button onclick="changeQty(${item.id}, -1)">-</button>
       <button onclick="removeFromCart(${item.id})">🗑</button>
@@ -31,7 +31,7 @@ function updateCart() {
     cartItems.appendChild(li);
   });
 
-  totalPriceEl.textContent = `Total Harga: Rp ${total.toLocaleString("id-ID")}`;
+  totalPriceEl.textContent = `Total Harga: Jpy ${total.toLocaleString("id-ID")}`;
   localStorage.setItem("cart", JSON.stringify(cart));
 }
 
@@ -70,9 +70,9 @@ function saveCartToTxt() {
   cart.forEach(item => {
     const subtotal = item.price * item.quantity;
     total += subtotal;
-    txt += `${item.name} x${item.quantity} - Rp ${subtotal.toLocaleString("id-ID")}\n`;
+    txt += `${item.name} x${item.quantity} - Jpy ${subtotal.toLocaleString("id-ID")}\n`;
   });
-  txt += `\nTotal Harga: Rp ${total.toLocaleString("id-ID")}`;
+  txt += `\nTotal Harga: Jpy ${total.toLocaleString("id-ID")}`;
 
   const blob = new Blob([txt], { type: "text/plain" });
   const url = URL.createObjectURL(blob);
@@ -105,7 +105,7 @@ function renderProducts() {
       <img src="${product.image}" alt="${product.name}" />
       <h3>${product.name}</h3>
       <p>${product.description}</p>
-      <p class="price">Rp ${product.price.toLocaleString("id-ID")}</p>
+      <p class="price">Jpy ${product.price.toLocaleString("id-ID")}</p>
       <button class="add-to-cart-btn">+ Keranjang</button>
     `;
     const btn = card.querySelector(".add-to-cart-btn");
