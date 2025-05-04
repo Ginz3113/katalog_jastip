@@ -60,7 +60,7 @@ const products = [
         name: "Fruity Candy",
         description: "permen rasa buah",
         price: 330,
-        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_onMcpDpUmxKqFhq4z1iLvoYh0GqwJGBbBw&s"
+        image: "https://2519.cdn.simplo7.net/static/2519/sku/doces-japoneses-bala-japonesa-de-frutas-sortidas-nodoame-112-gramas-1692382144781.jpg"
     },
     {
         id: 10,
