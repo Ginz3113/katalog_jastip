@@ -230,5 +230,13 @@ const products = [
         price: 390,
         image: "https://images-cdn.ubuy.co.id/634fbdfdf020d606497d33d8-meiji-almond-chocolate-matcha-green-tea.jpg"
     },
+     {
+          id: 34,
+          name: "Ghana premium Chocolatte",
+          description: "Coklat premium dari ghana",
+          price: 430,
+          image: "https://www.nipponshop.net/7330-home_default/ghana-premium-dark-nama-choco.webp"
+     }
+          
   // Tambahkan produk lainnya di sini...
 ];
