@@ -236,7 +236,14 @@ const products = [
           description: "Coklat premium dari ghana",
           price: 430,
           image: "https://www.nipponshop.net/7330-home_default/ghana-premium-dark-nama-choco.webp"
-     }
+     },
+     {
+          id: 34,
+          name: "Ghana premium milk Chocolatte",
+          description: "Coklat premium dari ghana",
+          price: 430,
+          image: "https://www.nipponshop.net/7331-home_default/ghana-premium-milk-nama-chocolate.webp"
+     },
           
   // Tambahkan produk lainnya di sini...
 ];
