@@ -227,7 +227,7 @@ const products = [
         id: 33,
         name: "Matcha Almond",
         description: "Kacang Almond yang dibalut dengan coklat Matcha",
-        price: 780,
+        price: 390,
         image: "https://images-cdn.ubuy.co.id/634fbdfdf020d606497d33d8-meiji-almond-chocolate-matcha-green-tea.jpg"
     },
   // Tambahkan produk lainnya di sini...
